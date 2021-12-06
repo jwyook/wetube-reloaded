@@ -3,12 +3,14 @@
 @import "./config/_reset.scss";
 
 //Components
+
 @import "./components/header.scss";
 @import "./components/footer.scss";
 @import "./components/video.scss";
 @import "./components/shared.scss";
 @import "./components/forms.scss";
 @import "./components/social-login.scss";
+@import "./components/video-player.scss";
 
 //Screes
 @import "./screens/home.scss";
