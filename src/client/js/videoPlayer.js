@@ -121,6 +121,17 @@ const handlePushF = (event) => {
   }
 };
 
+const handlePushM = (event) => {
+  if (event.keyCode === 77) {
+    handleMute();
+  }
+};
+
+const handleEnded = () => {
+  const { id } = videoContainer.dataset;
+  fetch(`/api/videos/${id}/view`, { method: "POST" });
+};
+
 if (video.readyState == 4) {
   handleLoadedMetadata();
 }
@@ -130,6 +141,7 @@ muteBtn.addEventListener("click", handleMute);
 volumeRange.addEventListener("input", handleVolumeChange);
 video.addEventListener("loadeddata", handleLoadedMetadata);
 video.addEventListener("timeupdate", handleTimeUpdate);
+video.addEventListener("ended", handleEnded);
 videoContainer.addEventListener("mousemove", handleMouseMove);
 videoContainer.addEventListener("mouseleave", handleMouseLeave);
 timeline.addEventListener("input", handleTimelineChange);
@@ -137,3 +149,4 @@ fullScreenBtn.addEventListener("click", handleFullscreen);
 video.addEventListener("click", handlePlayWithVideo);
 document.addEventListener("keyup", handlePushSpacebar);
 document.addEventListener("keyup", handlePushF);
+document.addEventListener("keyup", handlePushM);
