@@ -100,28 +100,15 @@ const handleMouseLeave = () => {
   controlsTimeout = setTimeout(hideControls, 3000);
 };
 
-const handlePlayWithVideo = () => {
-  if (video.paused) {
-    video.play();
-  } else {
-    video.pause();
-  }
-  playBtnIcon.classList = video.paused ? "fas fa-play" : "fas fa-pause";
-};
-
-const handlePushSpacebar = (event) => {
+const handlePush = (event) => {
   if (event.code === "Space") {
-    handlePlayWithVideo();
+    handlePlayClick();
   }
-};
-
-const handlePushF = (event) => {
+  // 70 == F
   if (event.keyCode === 70) {
     handleFullscreen();
   }
-};
-
-const handlePushM = (event) => {
+  // 77 == M
   if (event.keyCode === 77) {
     handleMute();
   }
@@ -146,7 +133,5 @@ videoContainer.addEventListener("mousemove", handleMouseMove);
 videoContainer.addEventListener("mouseleave", handleMouseLeave);
 timeline.addEventListener("input", handleTimelineChange);
 fullScreenBtn.addEventListener("click", handleFullscreen);
-video.addEventListener("click", handlePlayWithVideo);
-document.addEventListener("keyup", handlePushSpacebar);
-document.addEventListener("keyup", handlePushF);
-document.addEventListener("keyup", handlePushM);
+video.addEventListener("click", handlePlayClick);
+document.addEventListener("keyup", handlePush);
