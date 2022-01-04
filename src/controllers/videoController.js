@@ -1,6 +1,7 @@
 import Video from "../models/Video";
 import Comment from "../models/Comment";
 import User from "../models/User";
+import req from "express/lib/request";
 
 export const home = async (req, res) => {
   const videos = await Video.find({})
@@ -152,4 +153,14 @@ export const createComment = async (req, res) => {
   video.comments.push(comment._id);
   video.save();
   return res.status(201).json({ newCommentId: comment._id });
+};
+
+export const deleteComment = async (req, res) => {
+  const { id } = req.params;
+  const { owner } = await Comment.findById(id);
+  if (String(owner._id) === req.session.user._id) {
+    await Comment.findByIdAndDelete(id);
+  } else {
+    req.sentStatus(404);
+  }
 };
